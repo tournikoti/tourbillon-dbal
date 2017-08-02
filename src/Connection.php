@@ -13,16 +13,13 @@ use Exception;
 abstract class Connection {
     
     protected $config;
-    
-    public function __construct(Configurator $config, $name) {
-        $this->config = $config->get($name);
-        if (!$this->greatConfig()) {
-            throw new Exception("Database Configuration for " . get_class($this) . " is not great");
-        }
+
+    public function __construct(array $config) {
+        $this->config = $config;
         $this->build();
     }
+
+    public abstract function build();
     
-    protected abstract function build();
-    
-    protected abstract function greatConfig();
+    public abstract function query($sql);
 }

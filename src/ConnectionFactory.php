@@ -3,6 +3,7 @@
 namespace Tourbillon\Dbal;
 
 use Tourbillon\Configurator\Configurator;
+use Exception;
 
 /**
  * Description of ManagerFactory
@@ -30,17 +31,9 @@ class ConnectionFactory {
     
     public function getConnection($name = 'default') {
         if (!array_key_exists($name, $this->connections)) {
-            $class = $this->getConnectionClass($this->getDriver($this->config, $name));
-            $this->connections[$name] = new $class($this->config, $name);
+            $adapter = AdapterFactory::getInstance()->createAdapter($this->config, $name);
+            $this->connections[$name] = $adapter->getConnection();
         }
         return $this->connections[$name];
-    }
-
-    private function getConnectionClass($connectionName) {
-        return "\\Tourbillon\\Dbal\\Connection\\" . ucfirst(strtolower($connectionName)) . "Connection";
-    }
-    
-    private function getDriver(Configurator $config, $name) {
-        return array_key_exists('driver', $config->get($name)) ? $config->get($name)['driver'] : null;;
     }
 }
