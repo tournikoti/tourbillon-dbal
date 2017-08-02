@@ -11,4 +11,4 @@ $connectionFactory = new ConnectionFactory($configurator);
 
 $connection = $connectionFactory->getConnection('default');
 
-var_dump($connection);
+var_dump($connection->query("SELECT * FROM user"));
