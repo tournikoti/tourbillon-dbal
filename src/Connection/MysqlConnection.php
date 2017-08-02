@@ -23,7 +23,9 @@ class MysqlConnection extends Connection {
     }
 
     public function query($sql) {
-        return $this->pdo->query($sql);
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt;
     }
 
     private function getDsn() {

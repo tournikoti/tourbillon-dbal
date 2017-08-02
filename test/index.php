@@ -11,4 +11,8 @@ $connectionFactory = new ConnectionFactory($configurator);
 
 $connection = $connectionFactory->getConnection('default');
 
-var_dump($connection->query("SELECT * FROM user"));
+$stmt = $connection->query("SELECT * FROM user");
+
+while ($row = $stmt->fetch()) {
+    var_dump($row);
+}
