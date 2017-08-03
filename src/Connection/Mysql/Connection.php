@@ -3,7 +3,7 @@
 namespace Tourbillon\Dbal\Connection\Mysql;
 
 use Tourbillon\Dbal\Connection as BaseConnection;
-use Tourbillon\Dbal\Connection\Mysql\Binder;
+use Tourbillon\Dbal\Connection\Mysql\QueryBuilder;
 use PDOStatement;
 use PDO;
 
@@ -43,7 +43,8 @@ class Connection extends BaseConnection {
     }
     
     public function insert($table, array $data) {
-        
+        $query = $this->createQueryBuilder()
+                ->from($table);
     }
     
     public function update($table, array $data, array $condition = array()) {
@@ -54,8 +55,11 @@ class Connection extends BaseConnection {
         
     }
     
+    /**
+     * Return \Tourbillon\Dbal\Connection\Mysql\QueryBuilder
+     */
     public function createQueryBuilder() {
-        
+        return new QueryBuilder();
     }
     
     public function bindParams(PDOStatement $stmt, array $param) {
