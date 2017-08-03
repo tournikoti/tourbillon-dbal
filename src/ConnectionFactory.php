@@ -29,6 +29,11 @@ class ConnectionFactory {
         $this->connections = array();
     }
     
+    /**
+     * 
+     * @param type $name
+     * @return \Tourbillon\Dbal\Connection
+     */
     public function getConnection($name = 'default') {
         if (!array_key_exists($name, $this->connections)) {
             $adapter = AdapterFactory::getInstance()->createAdapter($this->config, $name);

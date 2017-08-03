@@ -11,7 +11,9 @@ $connectionFactory = new ConnectionFactory($configurator);
 
 $connection = $connectionFactory->getConnection('default');
 
-$stmt = $connection->query("SELECT * FROM user");
+$stmt = $connection->query("SELECT * FROM user WHERE created_at < :date", [
+    'date' => new \DateTime()
+]);
 
 while ($row = $stmt->fetch()) {
     var_dump($row);

@@ -21,5 +21,5 @@ abstract class Connection {
 
     public abstract function build();
     
-    public abstract function query($sql);
+    public abstract function query($sql, array $param = array());
 }

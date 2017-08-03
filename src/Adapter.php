@@ -31,6 +31,6 @@ abstract class Adapter
     }
     
     protected function getConnectionClass($driver) {
-        return "\\Tourbillon\\Dbal\\Connection\\" . ucfirst(strtolower($driver)) . "Connection";
+        return "\\Tourbillon\\Dbal\\Connection\\" . ucfirst(strtolower($driver)) . "\\Connection";
     }
 }
