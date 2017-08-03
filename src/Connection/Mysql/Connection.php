@@ -42,6 +42,18 @@ class Connection extends BaseConnection {
         return $stmt->fetchAll($dataType);
     }
     
+    public function insert($table, array $data) {
+        
+    }
+    
+    public function update($table, array $data, array $condition = array()) {
+        
+    }
+    
+    public function delete($table, array $condition = array()) {
+        
+    }
+    
     public function bindParams(PDOStatement $stmt, array $param) {
         foreach ($param as $key => $value) {
             $this->bindParam($stmt, $key, $value);
