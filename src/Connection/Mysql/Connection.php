@@ -6,6 +6,7 @@ use Tourbillon\Dbal\Connection as BaseConnection;
 use Tourbillon\Dbal\Connection\Mysql\QueryBuilder;
 use PDOStatement;
 use PDO;
+use Exception;
 
 /**
  * Description of MysqlConnection
@@ -31,7 +32,9 @@ class Connection extends BaseConnection {
     }
     
     public function execute(PDOStatement $stmt) {
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            throw new Exception("SQL Error {$stmt->errorInfo()[0]} {$stmt->errorInfo()[2]}");
+        }
     }
     
     public function fetch(PDOStatement $stmt, $dataType = PDO::FETCH_OBJ) {
