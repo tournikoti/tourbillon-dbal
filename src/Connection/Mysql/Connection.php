@@ -54,6 +54,10 @@ class Connection extends BaseConnection {
         
     }
     
+    public function createQueryBuilder() {
+        
+    }
+    
     public function bindParams(PDOStatement $stmt, array $param) {
         foreach ($param as $key => $value) {
             $this->bindParam($stmt, $key, $value);
