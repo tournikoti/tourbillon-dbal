@@ -27,8 +27,19 @@ class Connection extends BaseConnection {
     public function query($sql, array $param = array()) {
         $stmt = $this->pdo->prepare($sql);
         $this->bindParams($stmt, $param);
-        $stmt->execute();
         return $stmt;
+    }
+    
+    public function execute(PDOStatement $stmt) {
+        $stmt->execute();
+    }
+    
+    public function fetch(PDOStatement $stmt, $dataType = PDO::FETCH_OBJ) {
+        return $stmt->fetch($dataType);
+    }
+    
+    public function fetchAll(PDOStatement $stmt, $dataType = PDO::FETCH_OBJ) {
+        return $stmt->fetchAll($dataType);
     }
     
     public function bindParams(PDOStatement $stmt, array $param) {
