@@ -56,3 +56,19 @@ $queryBuilder = $connection->createQueryBuilder()
 
 var_dump($queryBuilder->getQuery(), $queryBuilder->getParameters());
 
+echo "<hr/>";
+
+// ---
+// MISE A JOUR
+// ---
+
+$queryBuilder = $connection->createQueryBuilder()
+        ->update('user')
+        ->set('firstname', 'Test')
+        ->set('lastname', 'Test')
+        ->set('email', 'test.test@test.test')
+        ->where('id = :id')
+        ->setParameter('id', 2)
+;
+
+var_dump($queryBuilder->getQuery(), $queryBuilder->getParameters());
