@@ -37,7 +37,20 @@ class QueryBuilder extends BaseQueryBuilder {
     }
     
     private function getQueryInsert() {
+        $this->query[] = "INSERT INTO";
+        $this->query[] = $this->table;
         
+        $propertyKeys = [];
+        $propertyValues = [];
+        foreach ($this->sets as $property => $value) {
+            $propertyKeys[] = $property;
+            $propertyValues[] = ":{$property}";
+            $this->setParameter($property, $value);
+        }
+        
+        $this->query[] = "(" . implode(', ', $propertyKeys) . ")";
+        $this->query[] = "VALUES";
+        $this->query[] = "(" . implode(', ', $propertyValues) . ")";
     }
     
     private function getQueryUpdate() {
