@@ -11,6 +11,8 @@ abstract class QueryBuilder {
     
     protected $data;
 
+    protected $sets;
+
     protected $table;
 
     protected $joins;
@@ -66,14 +68,20 @@ abstract class QueryBuilder {
     
     public function insert($table) {
         $this->queryType = self::QUERY_TYPE_INSERT;
+        $this->table = $table;
+        return $this;
     }
     
     public function update($table) {
         $this->queryType = self::QUERY_TYPE_UPDATE;
+        $this->table = $table;
+        return $this;
     }
     
-    public function delete() {
+    public function delete($table) {
         $this->queryType = self::QUERY_TYPE_DELETE;
+        $this->table = $table;
+        return $this;
     }
     
     /**
@@ -87,7 +95,8 @@ abstract class QueryBuilder {
     }
     
     public function set($property, $value) {
-        
+        $this->sets[$property] = $value;
+        return $this;
     }
     
     /**
@@ -180,6 +189,14 @@ abstract class QueryBuilder {
     public function setParameter($key, $value) {
         $this->parameters[$key] = $value;
         return $this;
+    }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function getParameters() {
+        return $this->parameters;
     }
     
     /**
