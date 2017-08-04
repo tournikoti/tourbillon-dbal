@@ -72,3 +72,17 @@ $queryBuilder = $connection->createQueryBuilder()
 ;
 
 var_dump($queryBuilder->getQuery(), $queryBuilder->getParameters());
+
+echo "<hr/>";
+
+// ---
+// SUPPRESSION
+// ---
+
+$queryBuilder = $connection->createQueryBuilder()
+        ->delete('user')
+        ->where('id = :id')
+        ->setParameter('id', 2)
+;
+
+var_dump($queryBuilder->getQuery(), $queryBuilder->getParameters());

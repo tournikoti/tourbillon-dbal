@@ -78,7 +78,10 @@ class QueryBuilder extends BaseQueryBuilder {
     }
     
     private function getQueryDelete() {
+        $this->query[] = "DELETE FROM";
+        $this->query[] = $this->table;
         
+        $this->transformWhere();
     }
 
     private function transformSelect() {
