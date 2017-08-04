@@ -46,16 +46,45 @@ class Connection extends BaseConnection {
     }
     
     public function insert($table, array $data) {
-        $query = $this->createQueryBuilder()
-                ->from($table);
+        $queryBuilder = $this->createQueryBuilder()->insert($table);
+              
+        foreach ($data as $key => $value) {
+            $queryBuilder->set($key, $value);
+        }
+        
+        $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
+        return $this->execute($stmt);
     }
     
     public function update($table, array $data, array $condition = array()) {
+        $queryBuilder = $this->createQueryBuilder()->update($table);
+              
+        foreach ($data as $key => $value) {
+            $queryBuilder->set($key, $value);
+        }
         
+        foreach ($condition as $key => $value) {
+            $queryBuilder->where("$key = :$key", [$key => $value]);
+        }
+        
+        $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
+        return $this->execute($stmt);
     }
     
+    /**
+     * 
+     * @param type $table
+     * @param array $condition
+     */
     public function delete($table, array $condition = array()) {
+        $queryBuilder = $this->createQueryBuilder()->delete($table);
+
+        foreach ($condition as $key => $value) {
+            $queryBuilder->where("$key = :$key", [$key => $value]);
+        }
         
+        $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
+        return $this->execute($stmt);
     }
     
     /**
