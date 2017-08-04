@@ -54,7 +54,23 @@ class QueryBuilder extends BaseQueryBuilder {
     }
     
     private function getQueryUpdate() {
+        if (empty($this->sets)) {
+            throw new Exception('You need to set values to update');
+        }
         
+        $this->query[] = "UPDATE";
+        $this->query[] = $this->table;
+        $this->query[] = "SET";
+        
+        $propertyKeys = [];
+        foreach ($this->sets as $property => $value) {
+            $propertyKeys[] = "$property = :{$property}";
+            $this->setParameter($property, $value);
+        }
+        
+        $this->query[] =  implode(', ', $propertyKeys);
+        
+        $this->transformWhere();
     }
     
     private function getQueryDelete() {
