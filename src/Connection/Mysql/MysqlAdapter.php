@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourbillon\Dbal\Adapter;
+namespace Tourbillon\Dbal\Connection\Mysql;
 
 use Tourbillon\Dbal\Adapter;
 

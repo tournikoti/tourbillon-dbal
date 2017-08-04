@@ -35,7 +35,8 @@ class AdapterFactory {
     }
     
     protected function getAdapterClass($connectionName) {
-        return "\\Tourbillon\\Dbal\\Adapter\\" . ucfirst(strtolower($connectionName)) . "Adapter";
+        $name = ucfirst(strtolower($connectionName));
+        return "\\Tourbillon\\Dbal\\Connection\\" . $name . "\\" . $name . "Adapter";
     }
     
     protected function getDriver(Configurator $config, $name) {
