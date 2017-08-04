@@ -37,6 +37,10 @@ class QueryBuilder extends BaseQueryBuilder {
     }
     
     private function getQueryInsert() {
+        if (empty($this->sets)) {
+            throw new Exception('You need to set values to insert');
+        }
+        
         $this->query[] = "INSERT INTO";
         $this->query[] = $this->table;
         
