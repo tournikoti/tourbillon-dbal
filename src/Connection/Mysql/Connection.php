@@ -52,7 +52,7 @@ class Connection extends BaseConnection {
             $queryBuilder->set($key, $value);
         }
         
-        $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
+        $stmt = $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
         return $this->execute($stmt);
     }
     
@@ -67,7 +67,7 @@ class Connection extends BaseConnection {
             $queryBuilder->where("$key = :$key", [$key => $value]);
         }
         
-        $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
+        $stmt = $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
         return $this->execute($stmt);
     }
     
@@ -83,7 +83,7 @@ class Connection extends BaseConnection {
             $queryBuilder->where("$key = :$key", [$key => $value]);
         }
         
-        $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
+        $stmt = $this->query($queryBuilder->getQuery(), $queryBuilder->getParameters());
         return $this->execute($stmt);
     }
     
