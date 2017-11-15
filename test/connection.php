@@ -11,6 +11,4 @@ $connectionFactory = new ConnectionFactory($configurator);
 
 $connection = $connectionFactory->getConnection('default');
 
-$connection->delete('user', [
-    'id' => 4
-]);
+var_dump($connection);
