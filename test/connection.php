@@ -1,6 +1,5 @@
 <?php
 
-use Tourbillon\Configurator\ConfiguratorFactory;
 use Tourbillon\Dbal\ConnectionFactory;
 
 require '../vendor/autoload.php';

@@ -1,13 +1,12 @@
 <?php
 
-use Tourbillon\Configurator\ConfiguratorFactory;
 use Tourbillon\Dbal\ConnectionFactory;
 
 require '../vendor/autoload.php';
 
-$configurator = ConfiguratorFactory::createInstance(realpath(__DIR__ . '/config/database.neon'));
+$config = include './config/database.php';
 
-$connectionFactory = new ConnectionFactory($configurator);
+$connectionFactory = new ConnectionFactory($config['database']);
 
 $connection = $connectionFactory->getConnection('default');
 
@@ -35,11 +34,7 @@ $queryBuilder = $connection->createQueryBuilder()
         ->where('id = :id')
         ->setParameter('id', 1);
 
-$stmt = $connection->query($queryBuilder->getQuery());
-$connection->bindParams($stmt, $queryBuilder->getParameters());
-$connection->execute($stmt);
-
-var_dump($connection->fetch($stmt));
+var_dump($connection->get($queryBuilder));
 
 echo "<hr/>";
 

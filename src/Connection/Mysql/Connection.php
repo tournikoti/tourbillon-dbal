@@ -2,11 +2,12 @@
 
 namespace Tourbillon\Dbal\Connection\Mysql;
 
+use Exception;
+use PDO;
+use PDOStatement;
 use Tourbillon\Dbal\Connection as BaseConnection;
 use Tourbillon\Dbal\Connection\Mysql\QueryBuilder;
-use PDOStatement;
-use PDO;
-use Exception;
+use Tourbillon\Dbal\QueryBuilder as BaseQueryBuilder;
 
 /**
  * Description of MysqlConnection
@@ -112,7 +113,21 @@ class Connection extends BaseConnection {
             $dsn .= ";charset=utf8";
         }
 
-
         return $dsn;
     }
+
+    public function all(BaseQueryBuilder $query) {
+        $stmt = $this->query($query->getQuery());
+        $this->bindParams($stmt, $query->getParameters());
+        $this->execute($stmt);
+        return $this->fetchAll($stmt);
+    }
+
+    public function get(BaseQueryBuilder $query) {
+        $stmt = $this->query($query->getQuery());
+        $this->bindParams($stmt, $query->getParameters());
+        $this->execute($stmt);
+        return $this->fetch($stmt);
+    }
+
 }

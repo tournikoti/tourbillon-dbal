@@ -19,4 +19,8 @@ abstract class Connection {
     public abstract function build();
     
     public abstract function query($sql, array $param = array());
+    
+    public abstract function get(QueryBuilder $query);
+    
+    public abstract function all(QueryBuilder $query);
 }
