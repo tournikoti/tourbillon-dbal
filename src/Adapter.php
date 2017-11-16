@@ -3,7 +3,6 @@
 namespace Tourbillon\Dbal;
 
 use Exception;
-use Tourbillon\Configurator\Configurator;
 
 /**
  * Description of Adapter
@@ -16,8 +15,8 @@ abstract class Adapter
     
     protected $config;
     
-    public function __construct(Configurator $config, $name) {
-        $this->config = $config->get($name);
+    public function __construct(array $config, $name) {
+        $this->config = $config[$name];
         if (!$this->greatConfig()) {
             throw new Exception("Database Configuration for {$name} is not great");
         }

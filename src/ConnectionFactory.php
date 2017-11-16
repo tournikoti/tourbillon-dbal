@@ -2,9 +2,6 @@
 
 namespace Tourbillon\Dbal;
 
-use Tourbillon\Configurator\Configurator;
-use Exception;
-
 /**
  * Description of ManagerFactory
  *
@@ -14,7 +11,7 @@ class ConnectionFactory {
     
     /**
      *
-     * @var Configurator
+     * @var array
      */
     private $config;
 
@@ -24,7 +21,7 @@ class ConnectionFactory {
      */
     private $connections;
 
-    public function __construct(Configurator $config) {
+    public function __construct(array $config) {
         $this->config = $config;
         $this->connections = array();
     }

@@ -2,9 +2,6 @@
 
 namespace Tourbillon\Dbal;
 
-use Tourbillon\Configurator\Configurator;
-use Exception;
-
 /**
  * Description of Connection
  *

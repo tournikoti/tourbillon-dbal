@@ -5,9 +5,9 @@ use Tourbillon\Dbal\ConnectionFactory;
 
 require '../vendor/autoload.php';
 
-$configurator = ConfiguratorFactory::createInstance(realpath(__DIR__ . '/config/database.neon'));
+$config = include './config/database.php';
 
-$connectionFactory = new ConnectionFactory($configurator);
+$connectionFactory = new ConnectionFactory($config['database']);
 
 $connection = $connectionFactory->getConnection('default');
 

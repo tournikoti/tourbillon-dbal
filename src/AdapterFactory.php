@@ -3,7 +3,6 @@
 namespace Tourbillon\Dbal;
 
 use Exception;
-use Tourbillon\Configurator\Configurator;
 
 /**
  * Description of AdapterFactory
@@ -29,7 +28,7 @@ class AdapterFactory {
         return self::$instance;
     }
     
-    public function createAdapter(Configurator $config, $name) {
+    public function createAdapter(array $config, $name) {
         $class = $this->getAdapterClass($this->getDriver($config, $name));
         return new $class($config, $name);
     }
@@ -39,11 +38,13 @@ class AdapterFactory {
         return "\\Tourbillon\\Dbal\\Connection\\" . $name . "\\" . $name . "Adapter";
     }
     
-    protected function getDriver(Configurator $config, $name) {
-        if (!array_key_exists('driver', $config->get($name))) {
+    protected function getDriver(array $config, $name) {
+        if (!array_key_exists($name, $config))
+            throw new Exception("Database configuration {$name} does not exist");
+            
+        if (!array_key_exists('driver', $config[$name]))
             throw new Exception("Database configuration {$name} need a driver");
-        }
         
-        return $config->get($name)['driver'];
+        return $config[$name]['driver'];
     }
 }
