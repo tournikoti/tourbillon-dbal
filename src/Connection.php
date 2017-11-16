@@ -16,6 +16,11 @@ abstract class Connection {
         $this->build();
     }
 
+    /**
+     * Return \Tourbillon\Dbal\QueryBuilder
+     */
+    public abstract function createQueryBuilder();
+    
     public abstract function build();
     
     public abstract function query($sql, array $param = array());
